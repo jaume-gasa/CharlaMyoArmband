@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Charla sobre el dispositivo Myo Armband.</title>
+
+		<meta name="description" content="Charla sobre el dispositivo Myo Armband.">
+		<meta name="author" content="Jaume Gasa Gómez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<style media="screen">
+			.half{
+				width: 50%;
+				float: left;
+			}
+			.source{
+				text-align:center;
+			}
+			.opencv-img{
+				width: 68%;
+				height: auto;
+			}
+			.bigcode{
+				height:100%;
+			}
+			.bigcode .big{
+				height: 100%;
+			}
+
+			.bigcode pre{
+				height: 78%;
+			}
+
+			.smallfont{
+				max-height: none !important;
+				height: 100%;
+				font-size: 17px !important;
+				line-height: 22px !important;
+			}
+		</style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Myo Armband</h1>
+					<p>Jaume Gasa Gómez</p>
+					<p><small> <a href="ua.jaume@gmail.com"><em>ua.jaume@gmail.com</em></a></small></p>
+				</section>
+
+				<section>
+					<h2>Quién es este tio</h2>
+					<ul>
+						<li><a href="ua.jaume@gmail.com">Jaume Gasa</a></li>
+						<li>Grado en Ingeniería Informática</li>
+						<li>Actualmente en el Máster de Automática y Robótica</li>
+						<li>Contacto</li>
+						<ul>
+							<li>correo: <a href="ua.jaume@gmail.com">ua.jaume@gmail.com</a></li>
+							<li>telegram: <em>@jaume-gasa</em></li>
+						</ul>
+
+
+				    <li><a href="https://twitter.com/python_alc">Python Alicante</a></li>
+					<ul>
+						<li>Telegram y Twitter: @python_alc</li>
+					</ul>
+					<li><a href="https://twitter.com/python_es">Python España</a></li>
+					<ul>
+						<li>Telegram: @PythonEsp</li>
+				        <li>Twitter: @python_es</li>
+				        <li><a href="http://2017.es.pycon.org/es/">PyConES 2017</a>, 22 al 24 de septiembre en Cáceres</li>
+					</ul>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Índice</h2>
+					<ol>
+						<li>Características técnicas</li>
+						<li>Inside the magic</li>
+						<li>Clasificación de señales EMG</li>
+						<li>Conclusiones</li>
+					</ol>
+				</section>
+
+
+				<section>
+					<h3>Características Técnicas</h3>
+					<div class="half small">
+						<img src="./Images/myo.png" alt=""  />
+					</div>
+					<div class="half ">
+						<ul>
+							<li>8 sensores EMG</li>
+							<li>Microcontrolador <a href="www.nxp.com/products/microcontrollers-and-processors/arm-processors/kinetis-cortex-m/k-series/k2x-usb-mcus/kinetis-k22-120-mhz-low-power-high-performance-usb-microcontrollers-mcus:K22_120?lang_cd=en">Kinetis K22</a></li>
+							<li>Unidad de medición inercial (IMU) <a href="https://www.invensense.com/products/motion-tracking/9-axis/">NRF51822</a></li>
+							<ul>
+								<li>Acelerómetro</li>
+								<li>Giroscopio</li>
+								<li>Magnetómetro</li>
+							</ul>
+							<li>Bluetooth <a href="https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF51822">NRF51822</a></li>
+							<li>Batería recargable</li>
+						</ul>
+						<p class="fragment">Precio: $199 <small class="fragment">+ gastos de envío</small></p>
+					</div>
+
+					<small>fuente: <a href="https://www.myo.com/techspecs"> ThalmicLabs - Myo Tech Specs</a>
+					y <a href="https://learn.adafruit.com/myo-armband-teardown/inside-myo">Adafruit - Inside Myo</a></small>
+				</section>
+
+
+
+				<section>
+					<h3>Inside the magic</h3>
+					<img src="./Images/myo-desmontada.jpg" alt=""  />
+					<small>Figura por <a href="https://learn.adafruit.com/assets/30336"> Becky Stern</a>. <a href="https://creativecommons.org/licenses/by-sa/3.0/"> [CC BY-SA 3.0]</a></small>
+				</section>
+
+
+				<section>
+					<h3>Inside the magic (II)</h3>
+					<p>Placa de circutio impreso</p>
+					<p></p>
+						<div class="half small">
+							<img src="./Images/myo-board.jpg" 	   width="800" alt=""/>
+
+						</div>
+						<div class="half small">
+							<img src="./Images/myo-board-back.jpg" width="800" alt=""/>
+						</div>
+					<div class="source">
+						<small>Figuras por <a href="https://learn.adafruit.com/assets/30336"> Becky Stern</a>. <a href="https://creativecommons.org/licenses/by-sa/3.0/"> [CC BY-SA 3.0]</a></small>
+					</div>
+				</section>
+
+				<section>
+					<h3>Inside the magic (III)</h3>
+					<p>Módulo EMG</p>
+					<img src="./Images/myo-muscle-sensor.jpg" width="800" alt=""  />
+					<small>Figura por <a href="https://learn.adafruit.com/assets/29293"> Becky Stern</a>. <a href="https://creativecommons.org/licenses/by-sa/3.0/"> [CC BY-SA 3.0]</a></small>
+				</section>
+
+				<section>
+					<h3>Inside the magic (III)</h3>
+					<p>Batería</p>
+					<img src="./Images/myo-battery.jpg" width="650" alt=""  />
+
+					<small>Figura por <a href="https://learn.adafruit.com/assets/30337"> Becky Stern</a>. <a href="https://creativecommons.org/licenses/by-sa/3.0/"> [CC BY-SA 3.0]</a></small>
+				</section>
+
+
+				<section>
+					<h3>Qué proyectos usan Myo Armband</h3>
+						<p>Control de prótesis</p>
+						<iframe width="800" height="500" src="https://www.youtube.com/embed/LSuzMxQDmzg" frameborder="0" allowfullscreen></iframe>
+				</section>
+
+
+				<section>
+					<h3>Qué proyectos usan Myo Armband</h3>
+						<p>¡Drones!</p>
+						<iframe width="800" height="500" src="https://www.youtube.com/embed/o3lv6g7j-yE" frameborder="0" allowfullscreen></iframe>
+				</section>
+
+
+				<section>
+					<h3>¡Genial! Por dónde empiezo a programar</h3>
+					<p>Dos opciones:
+						<ol>
+							<li><a href="https://developer.thalmic.com/downloads"> Usar el SDK oficial en alguna de las plataformas soportadas.</a></li>
+							<li><a href="https://developer.thalmic.com/forums/topic/541/"> Herramientas no oficiales.</a></li>
+						</ol>
+					</p>
+				</section>
+
+				<section>
+					<h3>It's <del>adventure</del> demo time</h3>
+					<img src="./Images/demo-time.gif" alt=""  />
+				</section>
+
+				<section>
+					<p>¡ Esto es todo !</p>
+					<img src="./Images/thank-you.gif" width="800" alt="">
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
